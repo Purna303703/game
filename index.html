@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Dungeon Ascension</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div id="game">
+
+    <!-- TOP BAR -->
+
+    <div id="topBar">
+
+        <div>
+
+            <h1>⚔️ Dungeon Ascension</h1>
+
+            <span id="dungeonText">
+                Dungeon 1
+            </span>
+
+        </div>
+
+        <div class="player-info">
+
+            <span>
+                ⭐ Lv <b id="level">0</b>
+            </span>
+
+            <span>
+                💰 <b id="gold">0</b>
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- GAME -->
+
+    <div id="gameContainer">
+
+        <canvas
+            id="gameCanvas"
+            width="1000"
+            height="600">
+        </canvas>
+
+
+        <!-- PLAYER HUD -->
+
+        <div id="playerHud" class="hud">
+
+            <h3>🧙 Player</h3>
+
+            <div class="bar-label">
+
+                <span>HP</span>
+
+                <span id="hpText">
+                    100 / 100
+                </span>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    id="hpBar"
+                    class="hp">
+                </div>
+
+            </div>
+
+
+            <div class="bar-label">
+
+                <span>XP</span>
+
+                <span id="xpText">
+                    0 / 100
+                </span>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    id="xpBar"
+                    class="xp">
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <span>
+                    ⚔️ ATK:
+                    <b id="attackStat">
+                        10
+                    </b>
+                </span>
+
+                <span>
+                    🛡️ DEF:
+                    <b id="defenseStat">
+                        5
+                    </b>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ENEMY HUD -->
+
+        <div
+            id="enemyHud"
+            class="hud enemy-hud">
+
+            <h3 id="enemyName">
+                Goblin
+            </h3>
+
+            <div class="bar-label">
+
+                <span>HP</span>
+
+                <span id="enemyHpText">
+                    60 / 60
+                </span>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    id="enemyHpBar"
+                    class="enemy-hp">
+                </div>
+
+            </div>
+
+            <div class="enemy-info">
+
+                <span>
+                    Lv
+                    <b id="enemyLevel">
+                        1
+                    </b>
+                </span>
+
+                <span>
+                    ⚔️
+                    <b id="enemyAttack">
+                        8
+                    </b>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <div id="message">
+            Enter the dungeon...
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- MOBILE CONTROLS -->
+        <!-- ========================= -->
+
+        <div id="mobileControls">
+
+
+            <!-- JOYSTICK -->
+
+            <div id="joystick">
+
+                <div id="joystickBase">
+
+                    <div id="joystickStick"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE BUTTONS -->
+
+            <div id="actionButtons">
+
+
+                <!-- ATTACK -->
+
+                <button
+                    id="attackButton"
+                    class="action-btn attack-btn">
+
+                    ⚔️
+
+                    <span>
+                        ATTACK
+                    </span>
+
+                </button>
+
+
+                <!-- POWERS -->
+
+                <button
+                    id="powersButton"
+                    class="action-btn powers-btn">
+
+                    ✨
+
+                    <span>
+                        POWERS
+                    </span>
+
+                </button>
+
+
+                <!-- HEAL -->
+
+                <button
+                    id="healButton"
+                    class="action-btn heal-btn">
+
+                    ❤️
+
+                    <span>
+                        HEAL
+                    </span>
+
+                    <small id="healCooldown">
+                        READY
+                    </small>
+
+                </button>
+
+            </div>
+
+
+            <!-- POWER MENU -->
+
+            <div
+                id="powerMenu"
+                class="power-menu">
+
+
+                <button
+                    id="powerStrikeButton"
+                    class="power-btn">
+
+                    🔥
+                    <span>
+                        Power Strike
+                    </span>
+
+                    <small id="powerCooldown">
+                        READY
+                    </small>
+
+                </button>
+
+
+                <button
+                    id="dashButton"
+                    class="power-btn">
+
+                    ⚡
+                    <span>
+                        Dash Attack
+                    </span>
+
+                    <small id="dashCooldown">
+                        READY
+                    </small>
+
+                </button>
+
+
+                <button
+                    id="fireButton"
+                    class="power-btn">
+
+                    🔥
+                    <span>
+                        Fire Blast
+                    </span>
+
+                    <small id="fireCooldown">
+                        READY
+                    </small>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DESKTOP CONTROLS -->
+
+    <div id="controls">
+
+        <div>
+            <b>Move</b>
+            <span>W A S D</span>
+        </div>
+
+        <div>
+            <b>Attack</b>
+            <span>SPACE</span>
+        </div>
+
+        <div>
+            <b>Dodge</b>
+            <span>SHIFT</span>
+        </div>
+
+        <div>
+            <b>Power</b>
+            <span>1</span>
+        </div>
+
+        <div>
+            <b>Dash</b>
+            <span>2</span>
+        </div>
+
+        <div>
+            <b>Fire</b>
+            <span>3</span>
+        </div>
+
+        <div>
+            <b>Heal</b>
+            <span>H</span>
+        </div>
+
+        <div>
+            <b>Restart</b>
+            <span>R</span>
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM PANEL -->
+
+    <div id="bottomPanel">
+
+        <div>
+            Weapon:
+            <b id="weaponName">
+                Wooden Sword
+            </b>
+        </div>
+
+        <div>
+            Damage:
+            <b id="weaponDamage">
+                +0
+            </b>
+        </div>
+
+        <div>
+            Enemies:
+            <b id="enemyCount">
+                0 / 3
+            </b>
+        </div>
+
+        <div>
+            Skills:
+            <b id="skillStatus">
+                Locked
+            </b>
+        </div>
+
+        <div>
+            Potions:
+            <b id="potionCount">
+                3
+            </b>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="game.js"></script>
+
+</body>
+
+</html>
